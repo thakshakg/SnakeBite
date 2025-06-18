@@ -1,0 +1,22 @@
+version: '3.8'
+
+services:
+  snake_game:
+    build: .
+    image: snake_game_img
+    container_name: snake_game_app
+    restart: unless-stopped # Or 'no' if you prefer it not to restart automatically
+    environment:
+      - DISPLAY= # Pass the host's DISPLAY variable for X11 forwarding
+      # SDL_VIDEODRIVER can sometimes be useful, but often not needed if X11 is correctly forwarded
+      # - SDL_VIDEODRIVER=x11
+    volumes:
+      # Mount the X11 socket for GUI forwarding
+      - /tmp/.X11-unix:/tmp/.X11-unix:rw
+      # Optional: Mount local code for development to see changes without rebuilding
+      # Ensure paths align with WORKDIR in Dockerfile (/app)
+      # - ./src:/app/src
+      # - ./assets:/app/assets
+      # - ./config.json:/app/config.json
+    stdin_open: true # Equivalent to docker run -i
+    tty: true        # Equivalent to docker run -t

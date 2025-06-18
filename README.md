@@ -122,3 +122,58 @@ Please ensure your contributions are well-tested and align with the project's go
 ---
 
 Enjoy the game!
+
+## Running with Docker
+
+This application can be built and run using Docker and Docker Compose, which helps manage the Pygame environment and its dependencies.
+
+### Prerequisites
+
+*   **Docker:** Ensure Docker is installed and running on your system. [Get Docker](https://docs.docker.com/get-docker/)
+*   **Docker Compose:** Ensure Docker Compose is installed (usually included with Docker Desktop). [Install Docker Compose](https://docs.docker.com/compose/install/)
+*   **X Server (Linux/macOS):** Your host machine must have an X server running.
+    *   **Linux:** This is typically standard.
+    *   **macOS:** You'll need to install and run [XQuartz](https://www.xquartz.org/).
+    *   **Windows:** You can use WSLg (if using WSL 2) or install a third-party X server like [VcXsrv](https://sourceforge.net/projects/vcxsrv/) or [Xming](https://sourceforge.net/projects/xming/).
+*   **X11 Forwarding Setup (Important):**
+    *   For the GUI to appear on your host screen, X11 forwarding needs to be configured.
+    *   **Linux:** You may need to allow local connections to your X server. Run the following command in your host's terminal:
+        ```bash
+        xhost +local:docker
+        ```
+        To restrict access again after you're done: `xhost -local:docker`
+    *   **macOS (with XQuartz):** Ensure XQuartz is running. In XQuartz preferences, go to the "Security" tab and make sure "Allow connections from network clients" is checked. You might also need to run `xhost +localhost` or `xhost +$(ipconfig getifaddr en0)` (or your active network interface).
+    *   **Windows (with VcXsrv/Xming):** When launching your X server, ensure that you disable access control (e.g., by checking "Disable access control" in VcXsrv's setup or by adding `-ac` to the command line). Ensure your `DISPLAY` environment variable is correctly set (often `localhost:0.0` or your machine's IP).
+
+### Build and Run
+
+1.  **Clone the repository** (if you haven't already).
+2.  **Navigate to the project root directory** (where `docker-compose.yml` is located).
+3.  **Build the Docker image and run the container:**
+    ```bash
+    docker-compose up --build
+    ```
+    *   The `--build` flag ensures the image is built (or rebuilt if changes are detected).
+    *   The game window should appear on your host display.
+
+4.  **To stop the application:**
+    *   Press `Ctrl+C` in the terminal where `docker-compose up` is running.
+    *   To remove the container afterwards: `docker-compose down`
+
+### Development with Docker
+
+If you are developing the game and want to see changes without rebuilding the image every time, you can uncomment the volume mount lines in `docker-compose.yml`:
+
+```yaml
+# services:
+#   snake_game:
+#     ...
+#     volumes:
+#       - /tmp/.X11-unix:/tmp/.X11-unix:rw
+#       # Uncomment these for live code reloading:
+#       - ./src:/app/src
+#       - ./assets:/app/assets
+#       - ./config.json:/app/config.json
+#     ...
+```
+With these lines uncommented, changes to your local `src`, `assets`, or `config.json` files will be reflected inside the running container. You might need to restart the game within the container (if it doesn't auto-reload) or restart the container (`docker-compose restart snake_game`) for some changes to take effect.
