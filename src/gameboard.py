@@ -1,7 +1,7 @@
 import pygame
-from snake import Snake
-from food import Food
-from ui_manager import UIManager # Import UIManager
+from .snake import Snake # Relative import
+from .food import Food # Relative import
+from .ui_manager import UIManager # Relative import
 
 class GameBoard:
     """

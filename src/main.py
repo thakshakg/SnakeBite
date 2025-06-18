@@ -1,8 +1,11 @@
 import pygame
 import json # Import json module
-from gameboard import GameBoard # Import GameBoard
+import os # Import os module for path manipulation
+from .gameboard import GameBoard # Use relative import for sibling module
 
-CONFIG_FILE = "config.json" # Filepath for the configuration file
+# Determine project root directory (one level up from src)
+PROJECT_ROOT = os.path.abspath(os.path.join(os.path.dirname(__file__), '..'))
+CONFIG_FILE = os.path.join(PROJECT_ROOT, "config.json") # Path to config file in project root
 
 def create_default_config():
     """
@@ -21,16 +24,17 @@ def create_default_config():
         "snake_speed_increment_factor": 0.0, # Factor to increase FPS by per food (0.0 = no increase)
         "theme": { # Visual theme settings
             "name": "Default",
-            "background_color": [0, 0, 0], # Black
-            "snake_color": [0, 255, 0],   # Green
-            "food_color": [255, 0, 0],    # Red
-            "text_color": [255, 255, 255], # White
-            "font_name": None,            # Pygame's default system font
+            "background_color": [0, 0, 0],
+            "snake_color": [0, 255, 0],
+            "food_color": [255, 0, 0],
+            "text_color": [255, 255, 255],
+            "font_name": None,
             "font_size_score": 36,
             "font_size_message": 48,
             "font_size_small_message": 36,
-            "eat_sound": "assets/sounds/eat.wav",       # Path to sound for eating food
-            "game_over_sound": "assets/sounds/game_over.wav" # Path to sound for game over
+            # Paths are relative to project root, assuming game is run from root
+            "eat_sound": "assets/sounds/eat.wav",
+            "game_over_sound": "assets/sounds/game_over.wav"
         }
     }
 

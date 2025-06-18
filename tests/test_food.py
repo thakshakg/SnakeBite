@@ -6,9 +6,9 @@ import os
 # Add the parent directory to the Python path
 sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), '..')))
 
-from food import Food
+from src.food import Food # Updated import path
 # Snake is not directly used but its body structure (list of tuples) is relevant for spawn testing
-# from snake import Snake
+# from src.snake import Snake # Updated import path if needed
 
 class TestFood(unittest.TestCase):
 

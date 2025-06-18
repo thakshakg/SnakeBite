@@ -6,7 +6,7 @@ import os
 # Add the parent directory to the Python path to allow importing project modules
 sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), '..')))
 
-from snake import Snake
+from src.snake import Snake # Updated import path
 
 class TestSnake(unittest.TestCase):
 

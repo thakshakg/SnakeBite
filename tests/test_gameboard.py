@@ -6,10 +6,10 @@ import os
 # Add the parent directory to the Python path
 sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), '..')))
 
-from gameboard import GameBoard
-from ui_manager import UIManager
-from snake import Snake
-from food import Food
+from src.gameboard import GameBoard # Updated import path
+from src.ui_manager import UIManager # Updated import path
+from src.snake import Snake # Updated import path
+from src.food import Food # Updated import path
 
 class TestGameBoard(unittest.TestCase):
 
