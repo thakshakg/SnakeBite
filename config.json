@@ -1,22 +1,9 @@
 {
-  "screen_width": 800,
-  "screen_height": 600,
+  "screen_width": 80,
+  "screen_height": 24,
   "fps": 10,
   "high_score": 0,
   "initial_snake_length": 3,
   "points_per_food": 10,
-  "snake_speed_increment_factor": 0.0,
-  "theme": {
-    "name": "Default from Config",
-    "background_color": [0, 0, 0],
-    "snake_color": [0, 255, 0],
-    "food_color": [255, 0, 0],
-    "text_color": [255, 255, 255],
-    "font_name": null,
-    "font_size_score": 36,
-    "font_size_message": 48,
-    "font_size_small_message": 36,
-    "eat_sound": "assets/sounds/eat.wav",
-    "game_over_sound": "assets/sounds/game_over.wav"
-  }
+  "snake_speed_increment_factor": 0.0
 }
